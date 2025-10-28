@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedeSEC - Ofertas de Novembro</title>
+    <!-- Carrega o Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define a fonte padrão para um visual mais limpo */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Adiciona um fallback de fonte caso o Inter não carregue */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <!-- 1. Layout e UI: Header -->
+    <header class="bg-slate-800 text-white p-4 shadow-md">
+        <div class="container mx-auto">
+            <h1 class="text-2xl font-bold">RedeSEC - Ofertas de Novembro</h1>
+        </div>
+    </header>
+
+    <!-- 1. Layout e UI: Corpo Principal (2 Colunas) -->
+    <main class="container mx-auto p-4 lg:flex lg:gap-6">
+
+        <!-- Coluna da Esquerda (Produtos) -->
+        <section class="lg:w-2/3">
+            <h2 class="text-3xl font-bold mb-4 text-slate-700">Nossos Produtos</h2>
+            <!-- 3. Funcionalidades da Lista de Produtos -->
+            <div id="lista-produtos-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                <!-- Os cards de produtos serão inseridos aqui pelo JavaScript -->
+            </div>
+        </section>
+
+        <!-- Coluna da Direita (Carrinho/Cotação) -->
+        <aside class="lg:w-1/3 mt-6 lg:mt-0">
+            <!-- Container flutuante/fixo -->
+            <div class="sticky top-6">
+                <div class="bg-white p-5 rounded-lg shadow-lg">
+                    <h2 class="text-2xl font-bold mb-4 border-b pb-2">Sua Cotação</h2>
+                    
+                    <!-- 4. Funcionalidades do Carrinho: Lista de Itens -->
+                    <div id="carrinho-itens" class="max-h-[40vh] overflow-y-auto pr-2">
+                        <!-- Itens do carrinho serão inseridos aqui -->
+                    </div>
+
+                    <!-- 5. Lógica de Negócio: Brindes -->
+                    <div id="carrinho-brindes" class="mt-4">
+                        <!-- Seção de brindes será inserida aqui -->
+                    </div>
+
+                    <!-- 4. Funcionalidades do Carrinho: Resumo da Cotação -->
+                    <div id="carrinho-total" class="mt-4 pt-4 border-t">
+                        <!-- Total será inserido aqui -->
+                    </div>
+
+                    <!-- Mensagem de erro/aviso (ex: para brindes) -->
+                    <div id="carrinho-msg" class="text-red-600 text-sm font-medium mt-2"></div>
+
+                    <!-- 6. Finalização da Cotação (WhatsApp) -->
+                    <button id="finalizar-whatsapp" class="mt-4 w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg text-lg shadow-lg transition-all flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        Finalizar Cotação via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+    </main>
+
+    <script>
+        // --- INÍCIO DO JAVASCRIPT ---
+
+        // 2. Dados dos Produtos (Convertidos do CSV)
+        // *** ATUALIZADO: Lista completa com os 27 produtos ***
+        const produtos = [
+            { id: 'P1', marca: 'CONTROL ID', modelo: 'IDUHF/LITE', descricao: 'Controlador de Acesso com leitor UHF - iDUHF Lite_Regras de acesso customizáveis e relatórios de acessos, Opera como controladora autônoma, Armazena até 200.000 usuários, Proteção IP65, Distância de leitura de até 12 metros', preco: 1299.00 },
+            { id: 'P2', marca: 'CONTROL ID', modelo: 'IDFACEPRO/FP/A', descricao: 'Controlador de Acesso iDFace_Reconhecimento Facial (10mil faces) + SIP + Proximidade 125 kHz ASK', preco: 1099.00 },
+            { id: 'P3', marca: 'CONTROL ID', modelo: 'IDFACEPRO/FP/A', descricao: 'Controlador de Acesso iDFace_Reconhecimento Facial (10mil faces) + SIP + Proximidade 125 kHz ASK', preco: 799.00 },
+            { id: 'P4', marca: 'CONTROL ID', modelo: 'IDBLOCKNEXT/PT/2FP/A', descricao: 'Catraca iDBlock Next_iDBlock Next Facial Pintada com 2 Faciais + Prox. 125 kHz', preco: 4500.00 },
+            { id: 'P5', marca: 'DCWORLD', modelo: 'DC - 10001', descricao: 'SWITCH 24P + 2P UPLINK SFP GIGA POE 380W', preco: 1499.00 },
+            { id: 'P6', marca: 'HIKVISION', modelo: 'DS-K1T672MX HIK', descricao: 'Facial 672 Hikvision', preco: 999.00 },
+            { id: 'P7', marca: 'HIKVISION', modelo: 'DS-K1T673DX', descricao: 'Terminal de Reconhecimento Facial,Vídeo porteiro                                              ', preco: 1199.00 },
+            { id: 'P8', marca: 'MEGATRON', modelo: 'CAT5E', descricao: 'CABO LAN CAT5E U/UTP 4PX24 AWG', preco: 595.00 },
+            { id: 'P9', marca: 'NICE', modelo: '10005552', descricao: 'RECEPTOR RF RTX3004', preco: 329.00 },
+            { id: 'P10', marca: 'NICE', modelo: '10005554', descricao: 'RECEPTOR MULTIFUNCAO RMF3004', preco: 699.00 },
+            { id: 'P11', marca: 'NICE', modelo: '10005555', descricao: 'CONTROLADOR MODULO GUARITA MG3000', preco: 799.00 },
+            { id: 'P12', marca: 'NICE', modelo: '10005931', descricao: 'TAG VEICULAR CR5A', preco: 4.75 },
+            { id: 'P13', marca: 'NICE', modelo: '20007254', descricao: 'CONTROLE REMOTO DIG RF 3TB NICE AZ-10', preco: 23.00 },
+            { id: 'P14', marca: 'NICE', modelo: '10006793', descricao: 'WEGO BOTAO DE SAIDA', preco: 128.00 },
+            { id: 'P15', marca: 'NICE', modelo: '10006846', descricao: 'WEGO TECLADO + RFID (STAND ALONE)', preco: 242.00 },
+            { id: 'P16', marca: 'NICE', modelo: '10007045', descricao: 'TAG VEICULAR CR4 ANTI METAL', preco: 17.25 },
+            { id: 'P17', marca: 'NICE', modelo: '10007184', descricao: '10007184 - ANTENA TAG UHF RTAG3010', preco: 1199.00 },
+            // --- 10 NOVOS PRODUTOS ADICIONADOS ---
+            { id: 'P18', marca: 'NICE', modelo: '10007240', descricao: 'LEITOR FACIAL FR410', preco: 659.00 },
+            { id: 'P19', marca: 'NICE', modelo: '10007241', descricao: 'LEITOR FACIAL FR720', preco: 999.00 },
+            { id: 'P20', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-MP100CZ', descricao: 'MOVIMENTADOR AUTOMATICO PORTA PIVO CINZA', preco: 1499.00 },
+            { id: 'P21', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-BERNANF-VD', descricao: 'BOTOEIRA EMERGENCIA (NA/NF) REARMÁVEL - VERDE', preco: 175.00 },
+            { id: 'P22', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-AIMNA/NF', descricao: 'BOTOEIRA COM SENSOR IR CAIXA METALICA SOBREPOR', preco: 145.00 },
+            { id: 'P23', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-ERL200P', descricao: 'FECHADURA ELETRICA SOBREPOR 12V P/ PORTAO PRETA S/ SENSOR', preco: 119.00 },
+            { id: 'P24', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-FC12RI', descricao: 'FECHO ELETRICO 12V 0,4A REVERSIVEL ACABAMENTO INOX', preco: 93.00 },
+            { id: 'P25', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-EI180ZL', descricao: 'KIT ELETROIMA 180KG COM SUPORTE ZL CX ALUM SEM SENSOR', preco: 175.00 },
+            { id: 'P26', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-EI120ZL', descricao: 'ELETROÍMÃ 120KG COM SUPORTE ZL CX ALUMÍNIO SEM SENSOR', preco: 175.00 },
+            { id: 'P27', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-FM100PB', descricao: 'FECHADURA ELETRON DIGITAL BLE C/ MACANETA PRETA', preco: 999.00 }
+        ];
+
+        // 4. Funcionalidades do Carrinho: Estado
+        let carrinho = []; // Formato: { id, modelo, preco, quantidade }
+        let brindesEscolhidos = {}; // Formato: { 'brinde-0': 'Opcao 1', 'brinde-1': 'Opcao 2' }
+
+        // --- Seletores de Elementos DOM ---
+        const listaProdutosEl = document.getElementById('lista-produtos-grid');
+        const carrinhoItensEl = document.getElementById('carrinho-itens');
+        const carrinhoBrindesEl = document.getElementById('carrinho-brindes');
+        const carrinhoTotalEl = document.getElementById('carrinho-total');
+        const whatsappBtn = document.getElementById('finalizar-whatsapp');
+        const carrinhoMsgEl = document.getElementById('carrinho-msg');
+
+        // --- Funções Auxiliares ---
+
+        /**
+         * Formata um número para a moeda brasileira (BRL).
+         * @param {number} valor - O valor numérico.
+         * @returns {string} - O valor formatado como "R$ 1.234,56".
+         */
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // --- Funções Principais da Aplicação ---
+
+        /**
+         * Renderiza a lista de produtos na coluna da esquerda.
+         */
+        function renderizarProdutos() {
+            let htmlProdutos = '';
+            produtos.forEach(produto => {
+                htmlProdutos += `
+                    <div class="border rounded-lg p-4 shadow bg-white flex flex-col h-full">
+                        <span class="text-sm text-gray-500 rounded-full bg-gray-100 px-2 py-0.5 self-start">${produto.marca}</span>
+                        <h3 class="font-bold text-lg mt-2 text-slate-800">${produto.modelo}</h3>
+                        <p class="text-sm text-gray-600 my-2 flex-grow">${produto.descricao}</p>
+                        <p class="text-2xl font-bold text-blue-600 my-2">${formatarMoeda(produto.preco)}</p>
+                        <button class="w-full mt-auto bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors font-semibold" 
+                                onclick="adicionarAoCarrinho('${produto.id}')">
+                            Adicionar ao Carrinho
+                        </button>
+                    </div>
+                `;
+            });
+            listaProdutosEl.innerHTML = htmlProdutos;
+        }
+
+        /**
+         * Adiciona um produto ao carrinho ou incrementa sua quantidade.
+         * @param {string} produtoId - O ID único do produto.
+         */
+        window.adicionarAoCarrinho = function(produtoId) {
+            const produto = produtos.find(p => p.id === produtoId);
+            if (!produto) return;
+
+            const itemExistente = carrinho.find(item => item.id === produtoId);
+
+            if (itemExistente) {
+                itemExistente.quantidade++;
+            } else {
+                carrinho.push({
+                    id: produto.id,
+                    modelo: produto.modelo,
+                    preco: produto.preco,
+                    quantidade: 1
+                });
+            }
+            renderizarCarrinho();
+        }
+
+        /**
+         * Altera a quantidade de um item no carrinho.
+         * @param {string} produtoId - O ID do produto a ser atualizado.
+         * @param {number} mudanca - O valor a ser somado (ex: +1 ou -1).
+         */
+        window.atualizarQuantidade = function(produtoId, mudanca) {
+            const item = carrinho.find(item => item.id === produtoId);
+            if (!item) return;
+
+            item.quantidade += mudanca;
+
+            if (item.quantidade <= 0) {
+                // Remove o item se a quantidade for 0 ou menor
+                carrinho = carrinho.filter(i => i.id !== produtoId);
+            }
+            renderizarCarrinho();
+        }
+
+        /**
+         * Armazena a escolha de um brinde.
+         * @param {string} brindeKey - A chave do brinde (ex: 'brinde-0').
+         * @param {string} valor - O valor selecionado (ex: 'Opcao 1').
+         */
+        window.escolherBrinde = function(brindeKey, valor) {
+            brindesEscolhidos[brindeKey] = valor;
+            // Limpa a mensagem de erro ao selecionar um brinde
+            carrinhoMsgEl.innerText = '';
+        }
+
+        /**
+         * Renderiza todo o conteúdo do carrinho (itens, brindes e total).
+         * Esta é a função central de atualização da UI.
+         */
+        function renderizarCarrinho() {
+            // Limpa as seções
+            carrinhoItensEl.innerHTML = '';
+            carrinhoBrindesEl.innerHTML = '';
+            carrinhoTotalEl.innerHTML = '';
+            carrinhoMsgEl.innerText = ''; // Limpa mensagens de erro
+
+            // 1. Renderizar Itens do Carrinho
+            if (carrinho.length === 0) {
+                carrinhoItensEl.innerHTML = '<p class="text-gray-500 text-center py-4">Sua cotação está vazia.</p>';
+            } else {
+                carrinho.forEach(item => {
+                    const subtotalItem = item.preco * item.quantidade;
+                    carrinhoItensEl.innerHTML += `
+                        <div class="flex justify-between items-center border-b py-3">
+                            <div class="flex-grow pr-2">
+                                <p class="font-bold text-slate-700">${item.modelo}</p>
+                                <p class="text-sm text-gray-500">${formatarMoeda(item.preco)} / un.</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="atualizarQuantidade('${item.id}', -1)" class="bg-gray-200 w-7 h-7 rounded-full font-bold text-lg flex items-center justify-center hover:bg-red-200 transition-colors">-</button>
+                                <span class="w-8 text-center font-semibold">${item.quantidade}</span>
+                                <button onclick="atualizarQuantidade('${item.id}', 1)" class="bg-gray-200 w-7 h-7 rounded-full font-bold text-lg flex items-center justify-center hover:bg-green-200 transition-colors">+</button>
+                            </div>
+                            <p class="font-bold text-slate-800 w-24 text-right">${formatarMoeda(subtotalItem)}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            // 2. Calcular Total e Brindes
+            const totalGeral = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+            const numBrindes = Math.floor(totalGeral / 2000);
+
+            // 3. Limpar escolhas de brindes inválidas (se o total diminuir)
+            const novasEscolhas = {};
+            for (let i = 0; i < numBrindes; i++) {
+                const key = `brinde-${i}`;
+                if (brindesEscolhidos[key]) {
+                    novasEscolhas[key] = brindesEscolhidos[key];
+                }
+            }
+            brindesEscolhidos = novasEscolhas;
+
+            // 4. Renderizar Seção de Brindes
+            if (numBrindes > 0) {
+                let htmlBrindes = `<h3 class="font-bold text-lg mt-4 mb-2 text-slate-700">Escolha seu(s) Brinde(s) (${numBrindes})</h3>`;
+                
+                const opcao1 = "PatchCord 1,5m + Medidor de Cabos";
+                const opcao2 = "Alicate de Crimpar + Fonte 12V";
+
+                for (let i = 0; i < numBrindes; i++) {
+                    const key = `brinde-${i}`;
+                    const escolhaAtual = brindesEscolhidos[key] || '';
+                    
+                    htmlBrindes += `
+                        <div class="mb-3 p-3 border rounded-lg bg-gray-50">
+                            <p class="font-semibold mb-2 text-slate-600">Brinde ${i + 1}</p>
+                            <label class="flex items-center gap-2 text-sm p-1 rounded hover:bg-gray-200 cursor-pointer">
+                                <input type="radio" name="${key}" value="${opcao1}" 
+                                       ${escolhaAtual === opcao1 ? 'checked' : ''} 
+                                       onchange="escolherBrinde('${key}', this.value)">
+                                ${opcao1}
+                            </label>
+                            <label class="flex items-center gap-2 text-sm p-1 rounded hover:bg-gray-200 cursor-pointer">
+                                <input type="radio" name="${key}" value="${opcao2}" 
+                                       ${escolhaAtual === opcao2 ? 'checked' : ''} 
+                                       onchange="escolherBrinde('${key}', this.value)">
+                                ${opcao2}
+                            </label>
+                        </div>
+                    `;
+                }
+                carrinhoBrindesEl.innerHTML = htmlBrindes;
+            }
+
+            // 5. Renderizar Total
+            carrinhoTotalEl.innerHTML = `
+                <div class="flex justify-between font-bold text-xl text-slate-800">
+                    <span>Total Geral:</span>
+                    <span>${formatarMoeda(totalGeral)}</span>
+                </div>
+            `;
+        }
+
+        /**
+         * Valida a cotação e gera a mensagem para o WhatsApp.
+         */
+        function finalizarViaWhatsApp() {
+            carrinhoMsgEl.innerText = ''; // Limpa mensagens anteriores
+
+            // Recalcula totais e brindes para garantir
+            const totalGeral = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+            const numBrindes = Math.floor(totalGeral / 2000);
+
+            // Validação 1: Carrinho vazio
+            if (carrinho.length === 0) {
+                carrinhoMsgEl.innerText = 'Seu carrinho está vazio.';
+                return;
+            }
+
+            // Validação 2: Brindes não selecionados
+            if (Object.keys(brindesEscolhidos).length < numBrindes) {
+                carrinhoMsgEl.innerText = 'Por favor, selecione todos os seus brindes.';
+                return;
+            }
+
+            // 6. Finalização da Cotação: Montar Mensagem
+            let textoMensagem = "Olá Rhaina, gostaria de solicitar uma cotação para as Ofertas de Novembro da RedeSEC:\n\n";
+            
+            // Produtos
+            textoMensagem += "*PRODUTOS:*\n";
+            carrinho.forEach(item => {
+                const subtotalItem = item.preco * item.quantidade;
+                textoMensagem += `- ${item.quantidade}x ${item.modelo} - ${formatarMoeda(subtotalItem)}\n`;
+            });
+
+            // Brindes
+            if (numBrindes > 0) {
+                textoMensagem += "\n*BRINDES ESCOLHIDOS:*\n";
+                for (let i = 0; i < numBrindes; i++) {
+                    const key = `brinde-${i}`;
+                    // A validação anterior já garante que a escolha existe
+                    const escolha = brindesEscolhidos[key];
+                    textoMensagem += `- Brinde ${i + 1}: (${escolha})\n`;
+                }
+            }
+
+            // Total
+            textoMensagem += `\n*TOTAL GERAL: ${formatarMoeda(totalGeral)}*\n\n`;
+            textoMensagem += "(Aguardo contato para fechar o pedido.)";
+
+            // Abrir link do WhatsApp
+            const numero = "5531983053188";
+            const mensagemFormatada = encodeURIComponent(textoMensagem);
+            window.open(`https://wa.me/${numero}?text=${mensagemFormatada}`, '_blank');
+        }
+
+        // --- Inicialização da Aplicação ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Adiciona o listener ao botão do WhatsApp
+            whatsappBtn.addEventListener('click', finalizarViaWhatsApp);
+            
+            // Renderiza os produtos e o estado inicial do carrinho
+            renderizarProdutos();
+            renderizarCarrinho();
+        });
+
+        // --- FIM DO JAVASCRIPT ---
+    </script>
+</body>
+</html>
+
+
+
+
+
+
