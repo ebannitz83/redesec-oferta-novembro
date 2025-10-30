@@ -76,35 +76,35 @@
         // --- INÍCIO DO JAVASCRIPT ---
 
         // 2. Dados dos Produtos (Convertidos do CSV)
-        // *** ATUALIZADO: Lista completa com os 27 produtos ***
+        // *** ATUALIZADO (REV1): Preços e itens P1-P5 atualizados conforme CSV. ***
         const produtos = [
-            { id: 'P1', marca: 'CONTROL ID', modelo: 'IDUHF/LITE', descricao: 'Controlador de Acesso com leitor UHF - iDUHF Lite_Regras de acesso customizáveis e relatórios de acessos, Opera como controladora autônoma, Armazena até 200.000 usuários, Proteção IP65, Distância de leitura de até 12 metros', preco: 1299.00 },
-            { id: 'P2', marca: 'CONTROL ID', modelo: 'IDFACEPRO/FP/A', descricao: 'Controlador de Acesso iDFace_Reconhecimento Facial (10mil faces) + SIP + Proximidade 125 kHz ASK', preco: 1099.00 },
-            { id: 'P3', marca: 'CONTROL ID', modelo: 'IDFACEPRO/FP/A', descricao: 'Controlador de Acesso iDFace_Reconhecimento Facial (10mil faces) + SIP + Proximidade 125 kHz ASK', preco: 799.00 },
-            { id: 'P4', marca: 'CONTROL ID', modelo: 'IDBLOCKNEXT/PT/2FP/A', descricao: 'Catraca iDBlock Next_iDBlock Next Facial Pintada com 2 Faciais + Prox. 125 kHz', preco: 4500.00 },
-            { id: 'P5', marca: 'DCWORLD', modelo: 'DC - 10001', descricao: 'SWITCH 24P + 2P UPLINK SFP GIGA POE 380W', preco: 1499.00 },
-            { id: 'P6', marca: 'HIKVISION', modelo: 'DS-K1T672MX HIK', descricao: 'Facial 672 Hikvision', preco: 999.00 },
-            { id: 'P7', marca: 'HIKVISION', modelo: 'DS-K1T673DX', descricao: 'Terminal de Reconhecimento Facial,Vídeo porteiro                                              ', preco: 1199.00 },
-            { id: 'P8', marca: 'MEGATRON', modelo: 'CAT5E', descricao: 'CABO LAN CAT5E U/UTP 4PX24 AWG', preco: 595.00 },
-            { id: 'P9', marca: 'NICE', modelo: '10005552', descricao: 'RECEPTOR RF RTX3004', preco: 329.00 },
-            { id: 'P10', marca: 'NICE', modelo: '10005554', descricao: 'RECEPTOR MULTIFUNCAO RMF3004', preco: 699.00 },
-            { id: 'P11', marca: 'NICE', modelo: '10005555', descricao: 'CONTROLADOR MODULO GUARITA MG3000', preco: 799.00 },
-            { id: 'P12', marca: 'NICE', modelo: '10005931', descricao: 'TAG VEICULAR CR5A', preco: 4.75 },
-            { id: 'P13', marca: 'NICE', modelo: '20007254', descricao: 'CONTROLE REMOTO DIG RF 3TB NICE AZ-10', preco: 23.00 },
-            { id: 'P14', marca: 'NICE', modelo: '10006793', descricao: 'WEGO BOTAO DE SAIDA', preco: 128.00 },
-            { id: 'P15', marca: 'NICE', modelo: '10006846', descricao: 'WEGO TECLADO + RFID (STAND ALONE)', preco: 242.00 },
-            { id: 'P16', marca: 'NICE', modelo: '10007045', descricao: 'TAG VEICULAR CR4 ANTI METAL', preco: 17.25 },
-            { id: 'P17', marca: 'NICE', modelo: '10007184', descricao: '10007184 - ANTENA TAG UHF RTAG3010', preco: 1199.00 },
-            // --- 10 NOVOS PRODUTOS ADICIONADOS ---
-            { id: 'P18', marca: 'NICE', modelo: '10007240', descricao: 'LEITOR FACIAL FR410', preco: 659.00 },
-            { id: 'P19', marca: 'NICE', modelo: '10007241', descricao: 'LEITOR FACIAL FR720', preco: 999.00 },
-            { id: 'P20', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-MP100CZ', descricao: 'MOVIMENTADOR AUTOMATICO PORTA PIVO CINZA', preco: 1499.00 },
-            { id: 'P21', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-BERNANF-VD', descricao: 'BOTOEIRA EMERGENCIA (NA/NF) REARMÁVEL - VERDE', preco: 175.00 },
-            { id: 'P22', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-AIMNA/NF', descricao: 'BOTOEIRA COM SENSOR IR CAIXA METALICA SOBREPOR', preco: 145.00 },
-            { id: 'P23', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-ERL200P', descricao: 'FECHADURA ELETRICA SOBREPOR 12V P/ PORTAO PRETA S/ SENSOR', preco: 119.00 },
-            { id: 'P24', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-FC12RI', descricao: 'FECHO ELETRICO 12V 0,4A REVERSIVEL ACABAMENTO INOX', preco: 93.00 },
-            { id: 'P25', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-EI180ZL', descricao: 'KIT ELETROIMA 180KG COM SUPORTE ZL CX ALUM SEM SENSOR', preco: 175.00 },
-            { id: 'P26', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-EI120ZL', descricao: 'ELETROÍMÃ 120KG COM SUPORTE ZL CX ALUMÍNIO SEM SENSOR', preco: 175.00 },
+            { id: 'P1', marca: 'CONTROL ID', modelo: 'IDUHF/LITE', descricao: 'Controlador de Acesso com leitor UHF - iDUHF Lite_Regras de acesso customizáveis e relatórios de acessos, Opera como controladora autônoma, Armazena até 200.000 usuários, Proteção IP65, Distância de leitura de até 12 metros', preco: 2099.00 },
+            { id: 'P2', marca: 'CONTROL ID', modelo: 'IDFACEPRO/FP/A', descricao: 'Controlador de Acesso iDFace_Reconhecimento Facial (10mil faces) + SIP + Proximidade 125 kHz ASK', preco: 729.00 },
+            { id: 'P3', marca: 'CONTROL ID', modelo: 'IDFMAX/FP/A', descricao: 'Reconhecimento Facial + Proximidade 125 kHz ASK', preco: 1055.00 },
+            { id: 'P4', marca: 'CONTROL ID', modelo: 'IDBLOCKNEXT/PT/2FP/A', descricao: 'Catraca iDBlock Next_iDBlock Next Facial Pintada com 2 Faciais + Prox. 125 kHz', preco: 4199.00 },
+            { id: 'P5', marca: 'CONTROL ID', modelo: 'IDBLOCKNEXT/PT/2FP/A', descricao: 'Catraca iDBlock Next_iDBlock Next Facial Pintada com 2 Faciais + Prox. 125 kHz', preco: 4299.00 },
+            { id: 'P6', marca: 'DCWORLD', modelo: 'DC - 10001', descricao: 'SWITCH 24P + 2P UPLINK SFP GIGA POE 380W', preco: 1499.00 },
+            { id: 'P7', marca: 'HIKVISION', modelo: 'DS-K1T672MX HIK', descricao: 'Facial 672 Hikvision', preco: 999.00 },
+            { id: 'P8', marca: 'HIKVISION', modelo: 'DS-K1T673DX', descricao: 'Terminal de Reconhecimento Facial,Vídeo porteiro                                              ', preco: 1199.00 },
+            { id: 'P9', marca: 'MEGATRON', modelo: 'CAT5E', descricao: 'CABO LAN CAT5E U/UTP 4PX24 AWG', preco: 595.00 },
+            { id: 'P10', marca: 'NICE', modelo: '10005552', descricao: 'RECEPTOR RF RTX3004', preco: 329.00 },
+            { id: 'P11', marca: 'NICE', modelo: '10005554', descricao: 'RECEPTOR MULTIFUNCAO RMF3004', preco: 699.00 },
+            { id: 'P12', marca: 'NICE', modelo: '10005555', descricao: 'CONTROLADOR MODULO GUARITA MG3000', preco: 799.00 },
+            { id: 'P13', marca: 'NICE', modelo: '10005931', descricao: 'TAG VEICULAR CR5A', preco: 4.75 },
+            { id: 'P14', marca: 'NICE', modelo: '20007254', descricao: 'CONTROLE REMOTO DIG RF 3TB NICE AZ-10', preco: 23.00 },
+            { id: 'P15', marca: 'NICE', modelo: '10006793', descricao: 'WEGO BOTAO DE SAIDA', preco: 128.00 },
+            { id: 'P16', marca: 'NICE', modelo: '10006846', descricao: 'WEGO TECLADO + RFID (STAND ALONE)', preco: 242.00 },
+            { id: 'P17', marca: 'NICE', modelo: '10007045', descricao: 'TAG VEICULAR CR4 ANTI METAL', preco: 17.25 },
+            { id: 'P18', marca: 'NICE', modelo: '10007184', descricao: '10007184 - ANTENA TAG UHF RTAG3010', preco: 1199.00 },
+            // --- Itens P19-P27 mantidos da lista anterior ---
+            { id: 'P19', marca: 'NICE', modelo: '10007240', descricao: 'LEITOR FACIAL FR410', preco: 659.00 },
+            { id: 'P20', marca: 'NICE', modelo: '10007241', descricao: 'LEITOR FACIAL FR720', preco: 999.00 },
+            { id: 'P21', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-MP100CZ', descricao: 'MOVIMENTADOR AUTOMATICO PORTA PIVO CINZA', preco: 1499.00 },
+            { id: 'P22', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-BERNANF-VD', descricao: 'BOTOEIRA EMERGENCIA (NA/NF) REARMÁVEL - VERDE', preco: 175.00 },
+            { id: 'P23', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-AIMNA/NF', descricao: 'BOTOEIRA COM SENSOR IR CAIXA METALICA SOBREPOR', preco: 145.00 },
+            { id: 'P24', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-ERL200P', descricao: 'FECHADURA ELETRICA SOBREPOR 12V P/ PORTAO PRETA S/ SENSOR', preco: 119.00 },
+            { id: 'P25', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-FC12RI', descricao: 'FECHO ELETRICO 12V 0,4A REVERSIVEL ACABAMENTO INOX', preco: 93.00 },
+            { id: 'P26', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-EI180ZL', descricao: 'KIT ELETROIMA 180KG COM SUPORTE ZL CX ALUM SEM SENSOR', preco: 175.00 },
             { id: 'P27', marca: 'PAPAIZ ASSA ABLOY', modelo: 'AA-FM100PB', descricao: 'FECHADURA ELETRON DIGITAL BLE C/ MACANETA PRETA', preco: 999.00 }
         ];
 
@@ -363,6 +363,7 @@
     </script>
 </body>
 </html>
+
 
 
 
